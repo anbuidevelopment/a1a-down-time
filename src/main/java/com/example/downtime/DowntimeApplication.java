@@ -8,6 +8,7 @@ public class DowntimeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DowntimeApplication.class, args);
+
     }
 
 }
