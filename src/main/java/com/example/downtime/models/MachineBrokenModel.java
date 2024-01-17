@@ -1,5 +1,6 @@
 package com.example.downtime.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,5 +27,8 @@ public class MachineBrokenModel {
 
     @Column(name= "Reason")
     private String descriptionBroken;
+
+    @JsonIgnore
+    private Integer totalElements;
 
 }

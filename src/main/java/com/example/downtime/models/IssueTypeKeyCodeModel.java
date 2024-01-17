@@ -1,5 +1,6 @@
 package com.example.downtime.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +23,8 @@ public class IssueTypeKeyCodeModel{
 
     @Column(name = "LostTime")
     private Integer lostTime;
+
+    @JsonIgnore
+    private Integer totalElements;
 
 }

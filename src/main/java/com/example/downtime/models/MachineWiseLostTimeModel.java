@@ -1,5 +1,6 @@
 package com.example.downtime.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,5 +18,8 @@ public class MachineWiseLostTimeModel {
 
     @Column(name = "Total")
     private int total;
+
+    @JsonIgnore
+    private Integer totalElements;
 
 }

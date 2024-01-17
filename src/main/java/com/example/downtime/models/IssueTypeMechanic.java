@@ -1,14 +1,14 @@
 package com.example.downtime.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Getter
 public class IssueTypeMechanic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,9 @@ public class IssueTypeMechanic {
 
     @Column(name = "Mechanic")
     private String mechanicCode;
+
+    @Column(name = "fullname")
+    private String mechanicName;
 
     @Column(name = "TotalLostTime")
     private Integer totalLostTime;
@@ -26,4 +29,6 @@ public class IssueTypeMechanic {
     @Column(name = "AfectiveCode")
     private String keyCode;
 
+    @JsonIgnore
+    private Integer totalElements;
 }
