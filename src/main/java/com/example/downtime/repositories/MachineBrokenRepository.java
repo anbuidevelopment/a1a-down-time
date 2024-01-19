@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface MachineBrokenRepository extends JpaRepository<MachineBrokenModel, Integer> {
 
-    @Query(value = "{CALL sp_machine_broken (?,?,?,?,?,?)}", nativeQuery = true)
+    @Query(value = "{CALL usp_machine_broken (?,?,?,?,?,?)}", nativeQuery = true)
     public List<MachineBrokenModel> getMachineBroken (
-            @Param("pageSize") Integer pageSize,
-            @Param("pageNum") Integer pageNum,
             @Param("facZone") String facZone,
             @Param("facLine") String facLine,
             @Param("startTime") String startTime,
-            @Param("endTime") String endTime
+            @Param("endTime") String endTime,
+            @Param("pageNum") Integer pageNum,
+            @Param("pageSize") Integer pageSize
     );
 }

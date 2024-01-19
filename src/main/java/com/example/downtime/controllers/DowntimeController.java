@@ -1,16 +1,9 @@
 package com.example.downtime.controllers;
 
 import com.example.downtime.ApiResponse.ApiResponse;
-import com.example.downtime.models.*;
 import com.example.downtime.service.DownTimeService;
-
-import com.example.downtime.utils.Util;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -22,14 +15,14 @@ public class DowntimeController {
 
     @GetMapping("/get-wise-lost-time")
     public ApiResponse getWiseLostTime(@RequestParam("s") Integer pageSize,
-                                          @RequestParam("p") Integer pageNumber,
-                                          @RequestParam(value="f", required = false,defaultValue = "") String facZone,
-                                          @RequestParam(value="l", required = false,defaultValue = "") String facLine,
-                                          @RequestParam(value="start", required = false, defaultValue = "") String startTime,
-                                          @RequestParam(value="end", required = false, defaultValue = "") String endTime
+                                                          @RequestParam("p") Integer pageNumber,
+                                                          @RequestParam(value="f", required = false,defaultValue = "") String facZone,
+                                                          @RequestParam(value="l", required = false,defaultValue = "") String facLine,
+                                                          @RequestParam(value="start", required = false) String startTime,
+                                                          @RequestParam(value="end", required = false) String endTime
     )
     {
-        return service.getMachineWiseLostTime(pageSize,pageNumber,facZone,facLine,startTime,endTime);
+        return service.getMachineWiseLostTime(facZone,facLine,startTime,endTime, pageNumber,pageSize);
     }
 
     @GetMapping("/get-broken")
@@ -37,11 +30,11 @@ public class DowntimeController {
                                                            @RequestParam("p") Integer pageNumber,
                                                            @RequestParam(value="f", required = false,defaultValue = "") String facZone,
                                                            @RequestParam(value="l", required = false,defaultValue = "") String facLine,
-                                                           @RequestParam(value="start", required = false, defaultValue = "") String startTime,
-                                                           @RequestParam(value="end", required = false, defaultValue = "") String endTime
+                                                           @RequestParam(value="start", required = false) String startTime,
+                                                           @RequestParam(value="end", required = false) String endTime
     )
     {
-        return service.getMachineBroken(pageSize,pageNumber,facZone,facLine,startTime,endTime
+        return service.getMachineBroken(facZone,facLine,startTime,endTime, pageNumber,pageSize
         );
     }
 
@@ -50,11 +43,11 @@ public class DowntimeController {
                                                          @RequestParam("p") Integer pageNumber,
                                                          @RequestParam(value="f", required = false,defaultValue = "") String facZone,
                                                          @RequestParam(value="l", required = false,defaultValue = "") String facLine,
-                                                         @RequestParam(value="start", required = false, defaultValue = "") String startTime,
-                                                         @RequestParam(value="end", required = false, defaultValue = "") String endTime
+                                                         @RequestParam(value="start", required = false) String startTime,
+                                                         @RequestParam(value="end", required = false) String endTime
     )
     {
-        return service.getIssueKeyCode(pageSize,pageNumber,facZone,facLine,startTime,endTime
+        return service.getIssueKeyCode(facZone,facLine,startTime,endTime, pageNumber,pageSize
         );
     }
 
@@ -63,12 +56,12 @@ public class DowntimeController {
                                                     @RequestParam("p") Integer pageNumber,
                                                     @RequestParam(value="f", required = false,defaultValue = "") String facZone,
                                                     @RequestParam(value="l", required = false,defaultValue = "") String facLine,
-                                                    @RequestParam(value="start", required = false, defaultValue = "") String startTime,
-                                                    @RequestParam(value="end", required = false, defaultValue = "") String endTime
+                                                    @RequestParam(value="start", required = false) String startTime,
+                                                    @RequestParam(value="end", required = false) String endTime
     )
     {
 
-        return  service.getIssueMechanic(pageSize,pageNumber,facZone,facLine,startTime,endTime);
+        return  service.getIssueMechanic(facZone,facLine,startTime,endTime, pageNumber,pageSize);
     }
 
 
@@ -77,11 +70,11 @@ public class DowntimeController {
                                           @RequestParam("p") Integer pageNumber,
                                           @RequestParam(value="f", required = false,defaultValue = "") String facZone,
                                           @RequestParam(value="l", required = false,defaultValue = "") String facLine,
-                                          @RequestParam(value="start", required = false, defaultValue = "") String startTime,
-                                          @RequestParam(value="end", required = false, defaultValue = "") String endTime
+                                          @RequestParam(value="start", required = false) String startTime,
+                                          @RequestParam(value="end", required = false) String endTime
     )
     {
-        return service.getMainDownTime(pageSize,pageNumber,facZone,facLine,startTime,endTime);
+        return service.getMainDownTime(facZone,facLine,startTime,endTime, pageNumber,pageSize);
 
     }
 

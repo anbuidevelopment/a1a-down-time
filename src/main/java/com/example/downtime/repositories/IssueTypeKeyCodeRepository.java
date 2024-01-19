@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface IssueTypeKeyCodeRepository extends JpaRepository<IssueTypeKeyCodeModel, Integer> {
 
-    @Query(value = "{CALL sp_kind_of_issue (?,?,?,?,?,?)}", nativeQuery = true)
+    @Query(value = "{CALL usp_kind_of_issue (?,?,?,?,?,?)}", nativeQuery = true)
     public List<IssueTypeKeyCodeModel> getIssueTypeKeyCode (
-            @Param("pageSize") Integer pageSize,
-            @Param("pageNum") Integer pageNum,
             @Param("facZone") String facZone,
             @Param("facLine") String facLine,
             @Param("startTime") String startTime,
-            @Param("endTime") String endTime
+            @Param("endTime") String endTime,
+            @Param("pageNum") Integer pageNum,
+            @Param("pageSize") Integer pageSize
     );
 }

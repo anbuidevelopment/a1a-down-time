@@ -30,12 +30,13 @@ public class Util {
         return columnNames;
     }
 
-    public <T> ApiResponse FormatApi (List<T> g, Integer pageSize, Integer pageNumber, Integer totalElements, Class<T>  model ) {
-        Integer x = (int) Math.ceil((double) totalElements / 10);
+    public <T> ApiResponse FormatApi (List<T> g, Integer pageSize, Integer pageNumber, Integer totalElements) {
+        Integer x = (int) Math.ceil((double) totalElements / pageSize);
         PaginationResponse c = new PaginationResponse(pageNumber,pageSize,totalElements,x,g);
         List<String> columnNames = new ArrayList<>();
 
-        if(model !=null) {
+        if(!g.isEmpty()) {
+            Class model = g.get(0).getClass();
             columnNames = this.getColumnNames(model);
         }
 

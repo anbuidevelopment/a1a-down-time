@@ -26,57 +26,57 @@ public class DownTimeService {
     private final Util util;
 
 
-    public ApiResponse getMachineWiseLostTime(int pageSize, int pageNum, String facZone, String facLine
-            , String startTime, String endTime
+    public ApiResponse getMachineWiseLostTime(String facZone, String facLine
+            , String startTime, String endTime,int pageNum,int pageSize
     ) {
-        List<MachineWiseLostTimeModel> result = wiseLostTimeRepository.getMachineWiseLostTime(pageSize, pageNum, facZone, facLine, startTime, endTime);
-        List<MachineWiseLostTimeModel> resultPage1 = wiseLostTimeRepository.getMachineWiseLostTime(1, 1, facZone, facLine, startTime, endTime);
+        List<MachineWiseLostTimeModel> result = wiseLostTimeRepository.getMachineWiseLostTime(facZone, facLine, startTime, endTime,pageNum,pageSize);
+        List<MachineWiseLostTimeModel> resultPage1 = wiseLostTimeRepository.getMachineWiseLostTime( facZone, facLine, startTime, endTime,1, 1);
         Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements, MachineWiseLostTimeModel.class);
+        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements);
         return res;
     }
 
-    public ApiResponse getMachineBroken (int pageSize, int pageNum, String facZone, String facLine
-            , String startTime, String endTime
+    public ApiResponse getMachineBroken (String facZone, String facLine
+            , String startTime, String endTime,int pageNum,int pageSize
     ) {
-        List<MachineBrokenModel> result = machineBrokenRepository.getMachineBroken(pageSize, pageNum, facZone, facLine, startTime, endTime);
-        List<MachineBrokenModel> resultPage1 = machineBrokenRepository.getMachineBroken(1, 1, facZone, facLine, startTime, endTime);
+        List<MachineBrokenModel> result = machineBrokenRepository.getMachineBroken(facZone, facLine, startTime, endTime,pageNum,pageSize);
+        List<MachineBrokenModel> resultPage1 = machineBrokenRepository.getMachineBroken(facZone, facLine, startTime, endTime,1, 1);
         Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements, MachineBrokenModel.class);
+        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements);
 
         return res;
     }
 
-    public ApiResponse getIssueKeyCode(int pageSize, int pageNum, String facZone, String facLine
-            , String startTime, String endTime) {
+    public ApiResponse getIssueKeyCode(String facZone, String facLine
+            , String startTime, String endTime,int pageNum,int pageSize) {
 
-        List<IssueTypeKeyCodeModel> result = issueTypeKeyCodeRepository.getIssueTypeKeyCode(pageSize, pageNum, facZone, facLine, startTime, endTime);
-        List<IssueTypeKeyCodeModel> resultPage1 = issueTypeKeyCodeRepository.getIssueTypeKeyCode(1, 1, facZone, facLine, startTime, endTime);
+        List<IssueTypeKeyCodeModel> result = issueTypeKeyCodeRepository.getIssueTypeKeyCode(facZone, facLine, startTime, endTime,pageNum,pageSize);
+        List<IssueTypeKeyCodeModel> resultPage1 = issueTypeKeyCodeRepository.getIssueTypeKeyCode(facZone, facLine, startTime, endTime,1, 1);
         Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements, IssueTypeKeyCodeModel.class);
+        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements);
 
         return res;
     }
 
 
-    public ApiResponse getIssueMechanic(int pageSize, int pageNum, String facZone, String facLine
-            , String startTime, String endTime) {
+    public ApiResponse getIssueMechanic(String facZone, String facLine
+            , String startTime, String endTime,int pageNum,int pageSize) {
 
-        List<IssueTypeMechanic> result = issueTypeMechanicRepository.getIssueTypeMechanic(pageSize, pageNum, facZone, facLine, startTime, endTime);
-        List<IssueTypeMechanic> resultPage1 = issueTypeMechanicRepository.getIssueTypeMechanic(1, 1, facZone, facLine, startTime, endTime);
+        List<IssueTypeMechanic> result = issueTypeMechanicRepository.getIssueTypeMechanic(facZone, facLine, startTime, endTime,pageNum,pageSize);
+        List<IssueTypeMechanic> resultPage1 = issueTypeMechanicRepository.getIssueTypeMechanic(facZone, facLine, startTime, endTime,1, 1);
         Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum, totalElements, IssueTypeMechanic.class);
+        ApiResponse res = util.FormatApi(result, pageSize,pageNum, totalElements);
 
         return res;
     }
 
-    public ApiResponse getMainDownTime(int pageSize, int pageNum, String facZone, String facLine
-            , String startTime, String endTime) {
+    public ApiResponse getMainDownTime(String facZone, String facLine
+            , String startTime, String endTime,int pageNum,int pageSize) {
 
-        List<MainDownTimeModel> result = mainDownTimeRepository.getMainDownTime(pageSize, pageNum, facZone, facLine, startTime, endTime);
-        List<MainDownTimeModel> resultPage1 = mainDownTimeRepository.getMainDownTime(1, 1, facZone, facLine, startTime, endTime);
+        List<MainDownTimeModel> result = mainDownTimeRepository.getMainDownTime(facZone, facLine, startTime, endTime,pageNum,pageSize);
+        List<MainDownTimeModel> resultPage1 = mainDownTimeRepository.getMainDownTime(facZone, facLine, startTime, endTime,1, 1);
         Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements, MainDownTimeModel.class);
+        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements);
 
         return res;
     }
@@ -86,7 +86,7 @@ public class DownTimeService {
         List<FactoryModel> listFac = factoryRepository.getFac();
         Map<String, List<String>> groupedData = util.groupByFacZone(listFac, FactoryModel::getFacZone, FactoryModel::getFacLine);
 
-        ApiResponse res = util.FormatApi(List.of(groupedData), 1,1,1,null);
+        ApiResponse res = util.FormatApi(List.of(groupedData), 1,1,1);
         return res;
     }
 
