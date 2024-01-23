@@ -1,18 +1,24 @@
 package com.example.downtime.controllers;
 
 import com.example.downtime.ApiResponse.ApiResponse;
+import com.example.downtime.constants.Constants;
 import com.example.downtime.service.FactoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-public class FactoryController extends Controller {
+@RequestMapping(path = Constants.BASE_URL)
+public class FactoryController {
     private final FactoryService factoryService;
 
-    @GetMapping("/fac")
-    public ApiResponse getFac() {
+    @GetMapping(Constants.URL_GET_FACTORY)
+    public ApiResponse<Map<String, List<String>>> getFac() {
         return factoryService.getFac();
     }
 }

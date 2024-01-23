@@ -33,12 +33,7 @@ public class Util {
         return columnNames;
     }
 
-    public ApiResponse formatApi (PaginationResponse paginationResponse) {
 
-        DataResponse data = new DataResponse(paginationResponse);
-
-        return new ApiResponse(HttpStatus.OK.value(), Constants.GET_SUCCESS_MESSAGE, data);
-    }
 
     public <T>  Map<String, List<String>> groupByFacZone(List<T> data,
                                                          Function<T, String> keyExtractor,

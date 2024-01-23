@@ -6,6 +6,7 @@ import com.example.downtime.models.IssueTypeKeyCodeModel;
 import com.example.downtime.models.IssueTypeMechanic;
 import com.example.downtime.repositories.IssueTypeKeyCodeRepository;
 import com.example.downtime.repositories.IssueTypeMechanicRepository;
+import com.example.downtime.utils.ApiConfig;
 import com.example.downtime.utils.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,23 +20,23 @@ public class IssueService {
     private final IssueTypeMechanicRepository issueTypeMechanicRepository;
     private final IssueTypeKeyCodeRepository issueTypeKeyCodeRepository;
 
-    private final Util util;
+    private final ApiConfig apiConfig;
 
-    public ApiResponse getIssueKeyCode(String facZone, String facLine
+    public ApiResponse<IssueTypeKeyCodeModel> getIssueKeyCode(String facZone, String facLine
             , String startTime, String endTime, int pageNum, int pageSize) {
 
         List<IssueTypeKeyCodeModel> result = issueTypeKeyCodeRepository.getIssueTypeKeyCode(facZone, facLine, startTime, endTime, pageNum, pageSize);
         Integer totalElements = result.get(0).getTotalElements();
-        PaginationResponse paginationResponse = new PaginationResponse(pageNum, pageSize, totalElements, result);
-        return util.formatApi(paginationResponse);
+        PaginationResponse<IssueTypeKeyCodeModel> paginationResponse = new PaginationResponse<>(pageNum, pageSize, totalElements, result);
+        return apiConfig.formatApi(paginationResponse);
     }
 
-    public ApiResponse getIssueMechanic(String facZone, String facLine
+    public ApiResponse<IssueTypeMechanic> getIssueMechanic(String facZone, String facLine
             , String startTime, String endTime, int pageNum, int pageSize) {
 
         List<IssueTypeMechanic> result = issueTypeMechanicRepository.getIssueTypeMechanic(facZone, facLine, startTime, endTime, pageNum, pageSize);
         Integer totalElements = result.get(0).getTotalElements();
-        PaginationResponse paginationResponse = new PaginationResponse(pageNum, pageSize, totalElements, result);
-        return util.formatApi(paginationResponse);
+        PaginationResponse<IssueTypeMechanic> paginationResponse = new PaginationResponse<>(pageNum, pageSize, totalElements, result);
+        return apiConfig.formatApi(paginationResponse);
     }
 }

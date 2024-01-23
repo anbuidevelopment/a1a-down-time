@@ -9,11 +9,11 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class DataResponse {
+public class DataResponse<T> {
     private List<String> headers;
-    private PaginationResponse contents;
+    private PaginationResponse<T> contents;
 
-    public DataResponse(PaginationResponse contents) {
+    public DataResponse(PaginationResponse<T> contents) {
         this.headers = contents.getHeaderDataList();
         this.contents = contents;
     }

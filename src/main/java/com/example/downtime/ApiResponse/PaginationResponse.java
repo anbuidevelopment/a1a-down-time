@@ -8,14 +8,14 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class PaginationResponse {
+public class PaginationResponse<T> {
     private int pageIndex;
     private int rowPerPage;
     private int totalElements;
     private int totalPages;
-    private List<?> dataList;
+    private List<T> dataList;
 
-    public PaginationResponse(int pageIndex, int rowPerPage, int totalElements, List<?> dataList) {
+    public PaginationResponse(int pageIndex, int rowPerPage, int totalElements, List<T> dataList) {
         this.pageIndex = pageIndex;
         this.rowPerPage = rowPerPage;
         this.totalElements = totalElements;
