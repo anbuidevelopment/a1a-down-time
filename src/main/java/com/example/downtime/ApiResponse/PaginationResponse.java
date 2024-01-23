@@ -1,6 +1,7 @@
 package com.example.downtime.ApiResponse;
 
 import com.example.downtime.utils.Util;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -23,6 +24,7 @@ public class PaginationResponse<T> {
         this.dataList = dataList;
     }
 
+    @JsonIgnore
     public List<String> getHeaderDataList() {
         Util util = new Util();
         Class<?> dataClass = this.dataList.get(0).getClass();
