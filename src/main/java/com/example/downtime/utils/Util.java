@@ -3,6 +3,7 @@ package com.example.downtime.utils;
 import com.example.downtime.ApiResponse.ApiResponse;
 import com.example.downtime.ApiResponse.DataResponse;
 import com.example.downtime.ApiResponse.PaginationResponse;
+import com.example.downtime.constants.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ public class Util {
 
         DataResponse data = new DataResponse(paginationResponse);
 
-        return new ApiResponse(HttpStatus.OK.value(), "Get item successfully", data);
+        return new ApiResponse(HttpStatus.OK.value(), Constants.GET_SUCCESS_MESSAGE, data);
     }
 
     public <T>  Map<String, List<String>> groupByFacZone(List<T> data,

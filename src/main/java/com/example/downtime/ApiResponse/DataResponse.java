@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class DataResponse {
-    private List<?> headers;
+    private List<String> headers;
     private PaginationResponse contents;
 
     public DataResponse(PaginationResponse contents) {

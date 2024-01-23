@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface WiseLostTimeRepository extends JpaRepository<MachineWiseLostTimeModel, String> {
+public interface MachineWiseLostTimeRepository extends JpaRepository<MachineWiseLostTimeModel, String> {
 
     @Query(value = "{CALL usp_machine_wise_lost_time (?,?,?,?,?,?)}", nativeQuery = true)
     public List<MachineWiseLostTimeModel> getMachineWiseLostTime(
