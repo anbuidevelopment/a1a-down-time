@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class IssueTypeKeyCodeModel{
+public class IssueTypeKeyCodeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rowNum;

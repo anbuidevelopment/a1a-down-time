@@ -3,46 +3,40 @@ package com.example.downtime.utils;
 import com.example.downtime.ApiResponse.ApiResponse;
 import com.example.downtime.ApiResponse.DataResponse;
 import com.example.downtime.ApiResponse.PaginationResponse;
-import jakarta.persistence.Column;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.function.Function;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class Util {
 
-    public List<String> getColumnNames(Class className) {
+    public List<String> getColumnNames(Class<?> className) {
         List<String> columnNames = new ArrayList<>();
         Field[] fields = className.getDeclaredFields();
 
         for (Field field : fields) {
-            if (field.isAnnotationPresent(Column.class)) {
-                Column columnAnnotation = field.getAnnotation(Column.class);
-                columnNames.add(columnAnnotation.name());
+            Annotation[] annotations = field.getAnnotations();
+            for (Annotation annotation : annotations) {
+                if (annotation.annotationType().getSimpleName().equals("Column")) {
+                   columnNames.add(field.getName());
+                }
             }
         }
 
         return columnNames;
     }
 
-    public <T> ApiResponse FormatApi (List<T> g, Integer pageSize, Integer pageNumber, Integer totalElements) {
-        Integer x = (int) Math.ceil((double) totalElements / pageSize);
-        PaginationResponse c = new PaginationResponse(pageNumber,pageSize,totalElements,x,g);
-        List<String> columnNames = new ArrayList<>();
+    public ApiResponse formatApi (PaginationResponse paginationResponse) {
 
-        if(!g.isEmpty()) {
-            Class model = g.get(0).getClass();
-            columnNames = this.getColumnNames(model);
-        }
+        DataResponse data = new DataResponse(paginationResponse);
 
-        DataResponse data = new DataResponse(columnNames, c);
-        ApiResponse res = new ApiResponse(HttpStatus.OK.value(), "Get item successfully", data);
-        return res;
+        return new ApiResponse(HttpStatus.OK.value(), "Get item successfully", data);
     }
 
     public <T>  Map<String, List<String>> groupByFacZone(List<T> data,

@@ -1,6 +1,7 @@
 package com.example.downtime.service;
 
 import com.example.downtime.ApiResponse.ApiResponse;
+import com.example.downtime.ApiResponse.PaginationResponse;
 import com.example.downtime.models.*;
 import com.example.downtime.repositories.*;
 
@@ -27,58 +28,49 @@ public class DownTimeService {
 
 
     public ApiResponse getMachineWiseLostTime(String facZone, String facLine
-            , String startTime, String endTime,int pageNum,int pageSize
+            , String startTime, String endTime, int pageNum, int pageSize
     ) {
-        List<MachineWiseLostTimeModel> result = wiseLostTimeRepository.getMachineWiseLostTime(facZone, facLine, startTime, endTime,pageNum,pageSize);
-        List<MachineWiseLostTimeModel> resultPage1 = wiseLostTimeRepository.getMachineWiseLostTime( facZone, facLine, startTime, endTime,1, 1);
-        Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements);
-        return res;
+        List<MachineWiseLostTimeModel> result = wiseLostTimeRepository.getMachineWiseLostTime(facZone, facLine, startTime, endTime, pageNum, pageSize);
+        Integer totalElements = result.get(0).getTotalElements();
+        PaginationResponse paginationResponse = new PaginationResponse(pageNum, pageSize, totalElements, result);
+        return util.formatApi(paginationResponse);
     }
 
-    public ApiResponse getMachineBroken (String facZone, String facLine
-            , String startTime, String endTime,int pageNum,int pageSize
+    public ApiResponse getMachineBroken(String facZone, String facLine
+            , String startTime, String endTime, int pageNum, int pageSize
     ) {
-        List<MachineBrokenModel> result = machineBrokenRepository.getMachineBroken(facZone, facLine, startTime, endTime,pageNum,pageSize);
-        List<MachineBrokenModel> resultPage1 = machineBrokenRepository.getMachineBroken(facZone, facLine, startTime, endTime,1, 1);
-        Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements);
-
-        return res;
+        List<MachineBrokenModel> result = machineBrokenRepository.getMachineBroken(facZone, facLine, startTime, endTime, pageNum, pageSize);
+        Integer totalElements = result.get(0).getTotalElements();
+        PaginationResponse paginationResponse = new PaginationResponse(pageNum, pageSize, totalElements, result);
+        return util.formatApi(paginationResponse);
     }
 
     public ApiResponse getIssueKeyCode(String facZone, String facLine
-            , String startTime, String endTime,int pageNum,int pageSize) {
+            , String startTime, String endTime, int pageNum, int pageSize) {
 
-        List<IssueTypeKeyCodeModel> result = issueTypeKeyCodeRepository.getIssueTypeKeyCode(facZone, facLine, startTime, endTime,pageNum,pageSize);
-        List<IssueTypeKeyCodeModel> resultPage1 = issueTypeKeyCodeRepository.getIssueTypeKeyCode(facZone, facLine, startTime, endTime,1, 1);
-        Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements);
-
-        return res;
+        List<IssueTypeKeyCodeModel> result = issueTypeKeyCodeRepository.getIssueTypeKeyCode(facZone, facLine, startTime, endTime, pageNum, pageSize);
+        Integer totalElements = result.get(0).getTotalElements();
+        PaginationResponse paginationResponse = new PaginationResponse(pageNum, pageSize, totalElements, result);
+        return util.formatApi(paginationResponse);
     }
 
 
     public ApiResponse getIssueMechanic(String facZone, String facLine
-            , String startTime, String endTime,int pageNum,int pageSize) {
+            , String startTime, String endTime, int pageNum, int pageSize) {
 
-        List<IssueTypeMechanic> result = issueTypeMechanicRepository.getIssueTypeMechanic(facZone, facLine, startTime, endTime,pageNum,pageSize);
-        List<IssueTypeMechanic> resultPage1 = issueTypeMechanicRepository.getIssueTypeMechanic(facZone, facLine, startTime, endTime,1, 1);
-        Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum, totalElements);
-
-        return res;
+        List<IssueTypeMechanic> result = issueTypeMechanicRepository.getIssueTypeMechanic(facZone, facLine, startTime, endTime, pageNum, pageSize);
+        Integer totalElements = result.get(0).getTotalElements();
+        PaginationResponse paginationResponse = new PaginationResponse(pageNum, pageSize, totalElements, result);
+        return util.formatApi(paginationResponse);
     }
 
     public ApiResponse getMainDownTime(String facZone, String facLine
-            , String startTime, String endTime,int pageNum,int pageSize) {
+            , String startTime, String endTime, int pageNum, int pageSize) {
 
-        List<MainDownTimeModel> result = mainDownTimeRepository.getMainDownTime(facZone, facLine, startTime, endTime,pageNum,pageSize);
-        List<MainDownTimeModel> resultPage1 = mainDownTimeRepository.getMainDownTime(facZone, facLine, startTime, endTime,1, 1);
-        Integer totalElements = resultPage1.get(0).getTotalElements();
-        ApiResponse res = util.FormatApi(result, pageSize,pageNum,totalElements);
-
-        return res;
+        List<MainDownTimeModel> result = mainDownTimeRepository.getMainDownTime(facZone, facLine, startTime, endTime, pageNum, pageSize);
+        Integer totalElements = result.get(0).getTotalElements();
+        PaginationResponse paginationResponse = new PaginationResponse(pageNum, pageSize, totalElements, result);
+        return util.formatApi(paginationResponse);
     }
 
     public ApiResponse getFac() {
@@ -86,8 +78,8 @@ public class DownTimeService {
         List<FactoryModel> listFac = factoryRepository.getFac();
         Map<String, List<String>> groupedData = util.groupByFacZone(listFac, FactoryModel::getFacZone, FactoryModel::getFacLine);
 
-        ApiResponse res = util.FormatApi(List.of(groupedData), 1,1,1);
-        return res;
+        PaginationResponse paginationResponse = new PaginationResponse(1, 1, 1, List.of(groupedData));
+        return util.formatApi(paginationResponse);
     }
 
 }
