@@ -1,18 +1,32 @@
 package com.example.downtime.service;
 
-import com.example.downtime.models.DowntimeCode;
-import com.example.downtime.repositories.DowntimeCodeRepository;
+import com.example.downtime.ApiResponse.ApiResponse;
+import com.example.downtime.ApiResponse.PaginationResponse;
+import com.example.downtime.models.*;
+import com.example.downtime.repositories.*;
+
+import com.example.downtime.utils.Util;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
+
 
 @Service
 @RequiredArgsConstructor
 public class DownTimeService {
-    private final DowntimeCodeRepository repository;
 
-    public List<DowntimeCode> getMcType() {
-        return repository.findAll();
-    }
+    private final MainDownTimeRepository mainDownTimeRepository;
+    private final FactoryRepository factoryRepository;
+
+    private final Util util;
+
+
+
+
+
+
 }
+
+
