@@ -26,7 +26,10 @@ public class IssueService {
             , String startTime, String endTime, int pageNum, int pageSize) {
 
         List<IssueTypeKeyCodeModel> result = issueTypeKeyCodeRepository.getIssueTypeKeyCode(facZone, facLine, startTime, endTime, pageNum, pageSize);
-        Integer totalElements = result.get(0).getTotalElements();
+        Integer totalElements = 0;
+        if(!result.isEmpty()) {
+            totalElements = result.get(0).getTotalElements();
+        }
         PaginationResponse<IssueTypeKeyCodeModel> paginationResponse = new PaginationResponse<>(pageNum, pageSize, totalElements, result);
         return apiConfig.formatApi(paginationResponse);
     }
@@ -35,7 +38,10 @@ public class IssueService {
             , String startTime, String endTime, int pageNum, int pageSize) {
 
         List<IssueTypeMechanic> result = issueTypeMechanicRepository.getIssueTypeMechanic(facZone, facLine, startTime, endTime, pageNum, pageSize);
-        Integer totalElements = result.get(0).getTotalElements();
+        Integer totalElements = 0;
+        if(!result.isEmpty()) {
+            totalElements = result.get(0).getTotalElements();
+        }
         PaginationResponse<IssueTypeMechanic> paginationResponse = new PaginationResponse<>(pageNum, pageSize, totalElements, result);
         return apiConfig.formatApi(paginationResponse);
     }

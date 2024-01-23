@@ -20,13 +20,16 @@ public class MachineService {
     private final MachineBrokenRepository machineBrokenRepository;
     private final MachineWiseLostTimeRepository machineWiseLostTimeRepository;
 
-    private ApiConfig apiConfig;
+    private final ApiConfig apiConfig;
 
     public ApiResponse<MachineWiseLostTimeModel> getMachineWiseLostTime(String facZone, String facLine
             , String startTime, String endTime, int pageNum, int pageSize
     ) {
         List<MachineWiseLostTimeModel> result = machineWiseLostTimeRepository.getMachineWiseLostTime(facZone, facLine, startTime, endTime, pageNum, pageSize);
-        Integer totalElements = result.get(0).getTotalElements();
+        Integer totalElements = 0;
+        if(!result.isEmpty()) {
+            totalElements = result.get(0).getTotalElements();
+        }
         PaginationResponse<MachineWiseLostTimeModel> paginationResponse = new PaginationResponse<>(pageNum, pageSize, totalElements, result);
         return apiConfig.formatApi(paginationResponse);
     }
@@ -35,7 +38,10 @@ public class MachineService {
             , String startTime, String endTime, int pageNum, int pageSize
     ) {
         List<MachineBrokenModel> result = machineBrokenRepository.getMachineBroken(facZone, facLine, startTime, endTime, pageNum, pageSize);
-        Integer totalElements = result.get(0).getTotalElements();
+        Integer totalElements = 0;
+        if(!result.isEmpty()) {
+            totalElements = result.get(0).getTotalElements();
+        }
         PaginationResponse<MachineBrokenModel> paginationResponse = new PaginationResponse<>(pageNum, pageSize, totalElements, result);
         return apiConfig.formatApi(paginationResponse);
     }

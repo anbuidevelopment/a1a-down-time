@@ -23,7 +23,10 @@ public class MainDowntimeService {
             , String startTime, String endTime, int pageNum, int pageSize) {
 
         List<MainDownTimeModel> result = mainDownTimeRepository.getMainDownTime(facZone, facLine, startTime, endTime, pageNum, pageSize);
-        Integer totalElements = result.get(0).getTotalElements();
+        Integer totalElements = 0;
+        if(!result.isEmpty()) {
+            totalElements = result.get(0).getTotalElements();
+        }
         PaginationResponse<MainDownTimeModel> paginationResponse = new PaginationResponse<>(pageNum, pageSize, totalElements, result);
         return apiConfig.formatApi(paginationResponse);
     }

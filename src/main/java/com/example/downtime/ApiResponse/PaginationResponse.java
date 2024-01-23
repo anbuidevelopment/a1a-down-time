@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -26,6 +27,8 @@ public class PaginationResponse<T> {
 
     @JsonIgnore
     public List<String> getHeaderDataList() {
+        if (this.dataList.isEmpty()) return new ArrayList<>();
+
         Util util = new Util();
         Class<?> dataClass = this.dataList.get(0).getClass();
         return util.getColumnNames(dataClass);
