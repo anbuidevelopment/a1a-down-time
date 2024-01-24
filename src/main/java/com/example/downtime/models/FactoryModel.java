@@ -11,6 +11,8 @@ public class FactoryModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer rowNum;
+
     @Column(name = "facLine")
     private String facLine;
 
